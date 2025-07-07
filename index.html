@@ -65,85 +65,70 @@
 
         .logo-container {
             position: absolute;
-            top: 20px;
+            top: 0;
+            left: 0;
             width: 100%;
-            height: 80px;
-            z-index: 10;
+            height: 90px;
+            pointer-events: none;
         }
 
+        .arai-logo, .make-in-india-logo {
+            position: absolute;
+            top: 65%;
+            transform: translateY(-50%);
+            width: 170px;
+            height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #fff;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.10);
+            border-radius: 18px;
+            border: 2px solid #e0e0e0;
+            z-index: 10;
+            pointer-events: auto;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .arai-logo { left: 20px; }
         .make-in-india-logo {
             position: absolute;
-            top: 10px;
-            right: 20px;
-            width: 140px;
-            height: 70px;
-            background: linear-gradient(45deg, #FF8C00, #32CD32);
-            border-radius: 15px;
+            top: 65%;
+            right: 60px;
+            transform: translateY(-50%);
+            width: 170px;
+            height: 90px;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            animation: float 3s ease-in-out infinite;
-            background-image: linear-gradient(45deg, #FF8C00, #32CD32);
-            background-size: cover;
-            background-position: center;
+            background: #fff;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.10);
+            border-radius: 20px;
+            border: 2px solid #e0e0e0;
+            z-index: 10;
+            pointer-events: auto;
+            padding: 0;
         }
 
-        .make-in-india-logo::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTQwIiBoZWlnaHQ9IjcwIiB2aWV3Qm94PSIwIDAgMTQwIDcwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyZWN0IHdpZHRoPSIxNDAiIGhlaWdodD0iNzAiIHJ4PSIxNSIgZmlsbD0iIzIzNGE1YSIvPjx0ZXh0IHg9IjcwIiB5PSIyNSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE0IiBmb250LXdlaWdodD0iYm9sZCIgZmlsbD0iI2ZmZiI+TWFrZSBpbiBJbmRpYTwvdGV4dD48dGV4dCB4PSI3MCIgeT0iNDUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMCIgZmlsbD0iIzQxNmY0NCI+yZNyb2R1Y2VkIGluIEluZGlhPC90ZXh0Pjwvc3ZnPg==') center center/cover;
+        .arai-logo img, .make-in-india-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 0;
+            display: block;
         }
 
-        .arai-logo {
-            position: absolute;
-            top: 10px;
-            left: 20px;
-            width: 140px;
-            height: 70px;
-            background: linear-gradient(45deg, #2c3e50, #3498db);
-            border-radius: 15px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            animation: float 3s ease-in-out infinite reverse;
-            background-image: linear-gradient(45deg, #2c3e50, #3498db);
-            background-size: cover;
-            background-position: center;
+        .arai-logo::before, .make-in-india-logo::before,
+        .arai-logo-text, .arai-logo-subtext {
+            display: none !important;
         }
 
-        .arai-logo::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTQwIiBoZWlnaHQ9IjcwIiB2aWV3Qm94PSIwIDAgMTQwIDcwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyZWN0IHdpZHRoPSIxNDAiIGhlaWdodD0iNzAiIHJ4PSIxNSIgZmlsbD0iIzNkNzRiOCIvPjx0ZXh0IHg9IjcwIiB5PSIzMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE4IiBmb250LXdlaWdodD0iYm9sZCIgZmlsbD0iI2ZmZiI+QVJBSTY8L3RleHQ+PHRleHQgeD0iNzAiIHk9IjQ4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTAiIGZpbGw9IiNlY2YwZjEiPlByb2dyZXNzIHRocm91Z2ggUmVzZWFyY2g8L3RleHQ+PC9zdmc+') center center/cover;
-        }
-
-        .arai-logo-text {
-            color: white;
-            font-size: 18px;
-            font-weight: bold;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
-            line-height: 1.2;
-            position: relative;
-            z-index: 1;
-        }
-
-        .arai-logo-subtext {
-            color: #ecf0f1;
-            font-size: 10px;
-            margin-top: 2px;
-            position: relative;
-            z-index: 1;
+        .make-in-india-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+            display: block;
         }
 
         @keyframes float {
@@ -378,10 +363,11 @@
         <div class="header">
             <div class="logo-container">
                 <div class="arai-logo">
-                    <div class="arai-logo-text">ARAI</div>
-                    <div class="arai-logo-subtext">Progress through Research</div>
+                    <img src="https://www.chitkara.edu.in/wp-content/uploads/2022/02/arai-logo-new.png" alt="ARAI Logo" />
                 </div>
-                <div class="make-in-india-logo"></div>
+                <div class="make-in-india-logo">
+                    <img src="https://digest.myhq.in/wp-content/uploads/2022/12/make-in-india-dream.jpg" alt="Make in India Logo" />
+                </div>
             </div>
             <h1>🔋 Battery Aadhar</h1>
             <p class="subtitle">Digital Identity & Sustainability Report</p>
@@ -513,7 +499,7 @@
                 <div class="info-item">
                     <strong>Recyclability:</strong>
                     <span>65-75%</span>
-                    <div class="status-badge">♻️ Recyclable</div>
+                    <div class="status-badge">♻ Recyclable</div>
                 </div>
             </div>
 

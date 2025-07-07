@@ -3,6 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Content + QR Generator</title>
+    <style>
+        /* Your existing styles here */
+        
+        /* QR Generator Styles */
+        .qr-section {
+            background: #f8f9fa;
+            padding: 30px;
+            margin: 40px 0;
+            border-radius: 10px;
+            border: 2px dashed #007bff;
+            text-align: center;
+        }
+        .qr-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin: 20px auto;
+            max-width: 500px;
+        }
+        .qr-input {
+            width: 80%;
+            padding: 10px;
+            margin: 10px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        .qr-btn {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+            font-size: 14px;
+        }
+        .qr-btn:hover {
+            background-color: #0056b3;
+        }
+        .download-btn {
+            background-color: #28a745;
+            display: none;
+        }
+        .download-btn:hover {
+            background-color: #1e7e34;
+        }
+        #qrcode {
+            margin: 15px auto;
+            padding: 15px;
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- YOUR EXISTING CONTENT STARTS HERE -->
+    <!-- Paste all your existing HTML content here -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AIS 189 - Automatic Identification System Security</title>
     <style>
         * {
@@ -724,6 +789,101 @@
         document.addEventListener('keydown', function(e) {
             if (e.key === 'ArrowRight') nextSlide();
             if (e.key === 'ArrowLeft') previousSlide();
+        });
+    </script>
+</body>
+</html>
+    
+    <!-- YOUR EXISTING CONTENT ENDS HERE -->
+    
+    <!-- QR CODE GENERATOR SECTION -->
+    <section class="qr-section">
+        <h2>🔗 QR Code Generator</h2>
+        <p>Generate QR codes for any text, URL, or share this page!</p>
+        
+        <div class="qr-container">
+            <input type="text" id="textInput" class="qr-input" placeholder="Enter text or URL here...">
+            <br>
+            <button class="qr-btn" onclick="generateQR()">Generate QR Code</button>
+            <button id="downloadBtn" class="qr-btn download-btn" onclick="downloadQR()">Download QR</button>
+            <button class="qr-btn" onclick="generatePageQR()" style="background-color: #6f42c1;">QR for This Page</button>
+            
+            <div id="qrcode"></div>
+        </div>
+        
+        <div style="font-size: 12px; color: #666; margin-top: 15px;">
+            <p><strong>Quick Options:</strong></p>
+            <button class="qr-btn" onclick="setInput('https://github.com/AUTOAI-CLOUD/QR')" style="background-color: #6c757d; font-size: 12px; padding: 5px 10px;">GitHub Repo</button>
+            <button class="qr-btn" onclick="setInput('mailto:your-email@example.com')" style="background-color: #6c757d; font-size: 12px; padding: 5px 10px;">Email</button>
+            <button class="qr-btn" onclick="setInput('tel:+1234567890')" style="background-color: #6c757d; font-size: 12px; padding: 5px 10px;">Phone</button>
+        </div>
+    </section>
+
+    <!-- QR Code Library -->
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+    
+    <script>
+        let qrCanvas = null;
+        
+        function generateQR() {
+            const text = document.getElementById('textInput').value.trim();
+            const qrContainer = document.getElementById('qrcode');
+            const downloadBtn = document.getElementById('downloadBtn');
+            
+            if (!text) {
+                alert('Please enter some text or URL!');
+                return;
+            }
+            
+            qrContainer.innerHTML = '';
+            
+            QRCode.toCanvas(text, {
+                width: 250,
+                height: 250,
+                colorDark: '#000000',
+                colorLight: '#ffffff',
+                correctLevel: QRCode.CorrectLevel.M
+            }, function (error, canvas) {
+                if (error) {
+                    console.error(error);
+                    alert('Error generating QR code!');
+                    return;
+                }
+                
+                qrCanvas = canvas;
+                canvas.style.border = '2px solid #ddd';
+                canvas.style.borderRadius = '8px';
+                qrContainer.appendChild(canvas);
+                downloadBtn.style.display = 'inline-block';
+            });
+        }
+        
+        function generatePageQR() {
+            document.getElementById('textInput').value = window.location.href;
+            generateQR();
+        }
+        
+        function setInput(value) {
+            document.getElementById('textInput').value = value;
+        }
+        
+        function downloadQR() {
+            if (!qrCanvas) {
+                alert('Please generate a QR code first!');
+                return;
+            }
+            
+            const link = document.createElement('a');
+            link.download = 'qrcode.png';
+            link.href = qrCanvas.toDataURL();
+            link.click();
+        }
+        
+        // Generate QR on Enter key
+        document.getElementById('textInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                generateQR();
+            }
         });
     </script>
 </body>
